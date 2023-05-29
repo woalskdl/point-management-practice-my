@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+group 'me.jay'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // spring batch starter
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // spring data jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // h2
+    implementation 'mysql:mysql-connector-java'
+    testRuntimeOnly 'com.h2database:h2'
+    // querydsl
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-core'
+    annotationProcessor 'com.querydsl:querydsl-apt'
+    annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', classifier: 'jpa'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    // asertj
+    testImplementation 'org.assertj:assertj-core'
+    // spring test
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // junit
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
