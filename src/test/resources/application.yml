@@ -1,0 +1,14 @@
+spring:
+  batch:
+    job:
+      # spring.batch.job.names를 job.name으로 치환
+      # 원래는 Job 이름을 넣지 않으면 모든 Job이 실행됩니다.
+      # 그러나 아래처럼 기본 Job이름을 NONE으로 설정해두면 job이름을 주지 않으면 그냥 아무런 Job도 실행시키지 않습니다.
+      # java -jar batch.jar --job.name=expirePointJob today=2021-01-01
+      names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: always # batch에서 사용하는 스키마 생성여부를 always로 변경
+  jpa:
+    show-sql: true # JPA가 실행한 SQL를 보여줍니다.
+    hibernate:
+      ddl-auto: create-drop # entity를 보고 자동으로 데이터베이스 생성 여부를 validate (생성은 안하고 검증만)로 변경
