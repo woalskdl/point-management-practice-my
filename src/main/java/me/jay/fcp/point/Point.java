@@ -1,9 +1,6 @@
 package me.jay.fcp.point;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.jay.fcp.point.wallet.PointWallet;
 
 import javax.persistence.*;
@@ -32,6 +29,7 @@ public class Point extends IdEntity {
     @Column(name = "is_used", nullable = false, columnDefinition = "TINYINT", length = 1)
     boolean used;
 
+    @Setter
     @Column(name = "is_expired", nullable = false, columnDefinition = "TINYINT", length = 1)
     boolean expired;
 

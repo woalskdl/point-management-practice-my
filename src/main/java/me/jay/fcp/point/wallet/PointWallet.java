@@ -1,9 +1,6 @@
 package me.jay.fcp.point.wallet;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.jay.fcp.point.IdEntity;
 
 import javax.persistence.Column;
@@ -20,6 +17,7 @@ public class PointWallet extends IdEntity {
     @Column(name = "user_id", unique = true, nullable = false)
     String userId;
 
+    @Setter
     @Column(name = "amount", columnDefinition = "BIGINT")
     BigInteger amount;
 }
