@@ -1,9 +1,6 @@
 package me.jay.fcp.point.reservation;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.jay.fcp.point.IdEntity;
 import me.jay.fcp.point.wallet.PointWallet;
 
@@ -30,6 +27,7 @@ public class PointReservation extends IdEntity {
     @Column(name = "available_days", nullable = false)
     int availableDays;
 
+    @Setter
     @Column(name = "is_executed", columnDefinition = "TINYINT", length = 1)
     boolean executed;
 
