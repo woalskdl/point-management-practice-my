@@ -20,17 +20,17 @@ import org.springframework.test.context.ActiveProfiles;
 public abstract class BatchTestSupport {
 
     @Autowired
-    private JobLauncher jobLauncher;
+    protected JobLauncher jobLauncher;
     @Autowired
-    private JobRepository jobRepository;
+    protected JobRepository jobRepository;
     @Autowired
-    PointWalletRepository pointWalletRepository;
+    protected PointWalletRepository pointWalletRepository;
     @Autowired
-    PointRepository pointRepository;
+    protected PointRepository pointRepository;
     @Autowired
-    MessageRepository messageRepository;
+    protected MessageRepository messageRepository;
     @Autowired
-    PointReservationRepository pointReservationRepository;
+    protected PointReservationRepository pointReservationRepository;
 
     protected JobExecution launchJob(Job job, JobParameters jobParameters) throws Exception {
         JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
