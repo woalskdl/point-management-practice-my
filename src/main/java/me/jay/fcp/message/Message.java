@@ -35,4 +35,12 @@ public class Message extends IdEntity {
                 String.format("%s 기준 %s 포인트가 만료되었습니다.", expiredDate.format(DateTimeFormatter.ISO_DATE), expiredAmount)
         );
     }
+
+    public static Message expireSoonPointMessageInstance(String userId, LocalDate expiredDate, BigInteger expiredAmount) {
+        return new Message(
+                userId,
+                String.format("%s 포인트 만료 예정", expiredAmount.toString()),
+                String.format("%s 까지 %s 포인트가 만료 예정 입니다.", expiredDate.format(DateTimeFormatter.ISO_DATE), expiredAmount)
+        );
+    }
 }
