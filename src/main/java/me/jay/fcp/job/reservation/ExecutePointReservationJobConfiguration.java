@@ -1,4 +1,4 @@
-package me.jay.fcp.job.expire.reservation;
+package me.jay.fcp.job.reservation;
 
 import me.jay.fcp.job.validator.TodayJobParameterValidator;
 import org.springframework.batch.core.Job;
