@@ -74,4 +74,23 @@ public class PointCustomRepositoryImpl extends QuerydslRepositorySupport impleme
                 elementCount
         );
     }
+
+    // select p from Point p where p.expireDate < :today and used = false and expired = false
+    @Override
+    public Page<Point> findPointToExpire(LocalDate today, Pageable pageable) {
+        QPoint point = QPoint.point;
+        JPQLQuery<Point> query = from(point)
+                .select(point)
+                .where(point.expireDate.lt(today))
+                .where(point.used.eq(false))
+                .where(point.expired.eq(false));
+
+        List<Point> points = getQuerydsl().applyPagination(pageable, query).fetch();
+        long elementCount = query.fetchCount();
+        return new PageImpl<>(
+                points,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()),
+                elementCount
+        );
+    }
 }

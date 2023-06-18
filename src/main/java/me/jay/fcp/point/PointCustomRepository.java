@@ -10,4 +10,6 @@ public interface PointCustomRepository {
 
     Page<ExpiredPointSummary> sumBeforeCriteriaDate(LocalDate alarmCriteriaDate, Pageable pageable);
 
+    Page<Point> findPointToExpire(LocalDate today, Pageable pageable);
+
 }
