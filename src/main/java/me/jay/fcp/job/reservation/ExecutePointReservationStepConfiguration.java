@@ -1,4 +1,4 @@
-package me.jay.fcp.job.expire.reservation;
+package me.jay.fcp.job.reservation;
 
 import me.jay.fcp.point.Point;
 import me.jay.fcp.point.PointRepository;
@@ -10,6 +10,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
@@ -17,6 +18,8 @@ import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilde
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Pair;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -26,6 +29,58 @@ import java.util.Map;
 
 @Configuration
 public class ExecutePointReservationStepConfiguration {
+
+    /**
+     * 파티셔닝 사용
+     * 단, 동시성 문제로 사용 불가
+     */
+    /*@Bean
+    @JobScope
+    public Step executePointReservationMasterStep (
+            StepBuilderFactory stepBuilderFactory,
+            TaskExecutorPartitionHandler partitionHandler,
+            PointReservationRepository pointReservationRepository,
+            @Value("#{T(java.time.LocalDate).parse(jobParameters[today])}") LocalDate today
+    ) {
+        return stepBuilderFactory
+                .get("executePointReservationMasterStep")
+                .partitioner(
+                        "executePointReservationStep",
+                        new ExecutePointReservationStepPartitioner(pointReservationRepository, today)
+                )
+                .partitionHandler(partitionHandler)
+                .build();
+    }
+
+    @Bean
+    public TaskExecutorPartitionHandler partitionHandler (
+            Step executePointreservationStep,
+            TaskExecutor taskExecutor
+    ) {
+        TaskExecutorPartitionHandler partitionHandler = new TaskExecutorPartitionHandler();
+        partitionHandler.setStep(executePointreservationStep);
+        partitionHandler.setGridSize(8);
+        partitionHandler.setTaskExecutor(taskExecutor);
+        return partitionHandler;
+    }
+
+    @Bean
+    @StepScope
+    public ReverseJpaPagingItemReader<PointReservation> executePointReservationItemReader(
+            PointReservationRepository pointReservationRepository,
+            @Value("#{T(java.time.LocalDate).parse(jobParameters[today])}") LocalDate today,
+            @Value("#{stepExecutionContext[minId]}") Long minId,
+            @Value("#{stepExecutionContext[maxId]}") Long maxId
+    ) {
+        return new ReverseJpaPagingItemReaderBuilder<PointReservation>()
+                .name("messageExpireSoonPointItemReader")
+                .query(
+                        pageable -> pointReservationRepository.findPointReservationToExecute(today, minId, maxId, pageable)
+                )
+                .pageSize(1000)
+                .sort(Sort.by(Sort.Direction.ASC, "id"))
+                .build();
+    }*/
 
     @Bean
     @JobScope

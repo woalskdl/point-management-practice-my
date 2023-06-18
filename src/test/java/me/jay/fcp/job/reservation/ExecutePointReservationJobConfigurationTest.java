@@ -1,4 +1,4 @@
-package me.jay.fcp.job.expire.reservation;
+package me.jay.fcp.job.reservation;
 
 import me.jay.fcp.BatchTestSupport;
 import me.jay.fcp.point.Point;
@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ExecutePointReservationJobConfigurationTest extends BatchTestSupport {
 
